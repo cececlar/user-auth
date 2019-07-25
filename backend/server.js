@@ -66,3 +66,18 @@ passport.deserializeUser((id, done) => {
 		}
 	)
 })
+
+userRoutes.route('/login').get(function(req, res, next){
+  console.log('user has logged in, req.body:');
+  console.log(req.body);
+  next();
+}),
+
+passport.authenticate('local'),
+(req, res) => {
+    console.log('logged in', req.user);
+    let userInfo = {
+        email: req.user.email
+    };
+    res.send(userInfo);
+  }
